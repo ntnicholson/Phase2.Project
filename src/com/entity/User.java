@@ -8,9 +8,8 @@ import javax.persistence.Id;
 public class User 
 {
 
+	private String userName;
 	@Id
-	@GeneratedValue
-	private int userID;
 	private String email;
 	private String password;
 	
@@ -19,19 +18,19 @@ public class User
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userID, String email, String password) {
+	public User(String userName, String email, String password) {
 		super();
-		this.userID = userID;
+		this.userName = userName;
 		this.email = email;
 		this.password = password;
 	}
 
-	public int getUserID() {
-		return userID;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {
@@ -52,8 +51,9 @@ public class User
 
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", email=" + email + ", password=" + password + "]";
+		return "User [userName=" + userName + ", email=" + email + ", password=" + password + "]";
 	}
+
 	
 	
 }

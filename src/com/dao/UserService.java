@@ -37,9 +37,29 @@ public class UserService implements IUserInterface {
 	}
 
 	@Override
-	public boolean Login(User login) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean Login(User find) {
+		boolean created = false;
+
+		try {
+			Configuration config = new Configuration().configure();
+			config.addAnnotatedClass(com.entity.User.class);
+			StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
+					.applySettings(config.getProperties());
+
+			SessionFactory f = config.buildSessionFactory(builder.build());
+			Session s = f.openSession();
+			Transaction tx = s.beginTransaction();
+
+			User login = s.load(User.class, find.getEmail());
+			find.setUserName(login.getUserName());
+			//System.out.println(login.toString());
+			s.close();
+			created = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return created;
 	}
 
 }
